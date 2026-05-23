@@ -1,4 +1,6 @@
-# Menú
+from colorama import init, Fore
+
+init(autoreset=True)
 
 stock = [
     {"nombre": "Lapicera Azul", "categoria": "Escritura", "precio": 150},
@@ -18,35 +20,35 @@ opcion = "0"
 while opcion != "5":
 
     print("")
-    print("---Bienvenido al sistema de gestión de productos---")
+    print(Fore.MAGENTA + "---Bienvenido al sistema de gestión de productos---")
     print("")
-    print("1. Agregar producto")    
-    print("2. Ver productos")
-    print("3. Buscar producto")
-    print("4. Eliminar producto")
-    print("5. Salir")
+    print(Fore.YELLOW + "1. Agregar producto")    
+    print(Fore.YELLOW + "2. Ver productos")
+    print(Fore.YELLOW + "3. Buscar producto")
+    print(Fore.YELLOW + "4. Eliminar producto")
+    print(Fore.YELLOW + "5. Salir")
     print("")
 
-    opcion = input("Elegí una opción para continuar: ")
+    opcion = input(Fore.WHITE + "Elegí una opción para continuar: ")
 
     match opcion:
         case "1":
-            print("Agregar producto")
+            print(Fore.GREEN + "\nAgregar producto")
 
-            nombre = input("Ingresa el nombre del producto: ").strip().title()
+            nombre = input(Fore.WHITE + "Ingresa el nombre del producto: ").strip().title()
             while nombre == "" :
-                print("Error: El nombre es obligatorio.")
-                nombre = input("Ingresa el nombre del producto: ").strip().title()
+                print(Fore.RED + "Error: El nombre es obligatorio.")
+                nombre = input(Fore.WHITE + "Ingresa el nombre del producto: ").strip().title()
 
-            categoria = input("Ingresa la categoría del producto: ").strip().title()
+            categoria = input(Fore.WHITE + "Ingresa la categoría del producto: ").strip().title()
             while categoria == "" :
-                print("Error: La categoría es obligatoria.")
-                categoria = input("Ingresa la categoría del producto: ").strip().title()
+                print(Fore.RED + "Error: La categoría es obligatoria.")
+                categoria = input(Fore.WHITE + "Ingresa la categoría del producto: ").strip().title()
 
-            precio = input("Ingresa el precio del producto: ").strip()
-            while precio == "" or not precio.isdigit():
-                print("Error: El precio es obligatorio y debe ser un número entero.")
-                precio = input("Ingresa el precio del producto: ").strip()
+            precio = input(Fore.WHITE + "Ingresa el precio del producto: ").strip()
+            while precio == "" or not precio.isdecimal():
+                print(Fore.RED + "Error: El precio es obligatorio y debe ser un número entero.")
+                precio = input(Fore.WHITE + "Ingresa el precio del producto: ").strip()
 
             producto = {
                 "nombre": nombre,
@@ -55,56 +57,65 @@ while opcion != "5":
             }
             
             stock.append(producto)
-            print("¡Producto agregado con éxito!")
+            print("")
+            print(Fore.GREEN + "¡Producto agregado con éxito!")
 
         case "2":
             print("")
-            print("Ver productos")
+            print(Fore.MAGENTA + "Ver productos")
             print("")
             for contador, producto in enumerate(stock):
-                print(f"Producto # {contador + 1}:")
-                print(f"  Nombre: {producto['nombre']}")
-                print(f"  Categoría: {producto['categoria']}")
-                print(f"  Precio: {producto['precio']}")
+                print(Fore.YELLOW + f"Producto # {contador + 1}:")
+                print(Fore.WHITE + f"  Nombre: {producto['nombre']}")
+                print(Fore.WHITE + f"  Categoría: {producto['categoria']}")
+                print(Fore.WHITE + f"  Precio: ${producto['precio']}")
                 print("")
 
         case "3":
-            print("Buscar producto")
-            busqueda = input("Ingresa el nombre del producto a buscar: ").strip().title()
+            print(Fore.MAGENTA + "\nBuscar producto")
+            busqueda = input(Fore.WHITE + "Ingresa el nombre del producto a buscar: ").strip().lower()
             encontrado = False
 
+            print("")
+            print(Fore.MAGENTA + "Resultados de la búsqueda:")
+            print("")
+            
             for contador, producto in enumerate(stock):
-                if busqueda == producto["nombre"]:
-                    print("Producto encontrado:")
-                    print(f"Producto # {contador + 1}:")
-                    print(f"  Nombre: {producto['nombre']}")
-                    print(f"  Categoría: {producto['categoria']}")
-                    print(f"  Precio: {producto['precio']}")
+                if busqueda in producto["nombre"].lower():
+                    print(Fore.GREEN + "Producto encontrado:")
+                    print("")
+                    print(Fore.YELLOW + f"Producto # {contador + 1}:")
+                    print(Fore.WHITE + f"  Nombre: {producto['nombre']}")
+                    print(Fore.WHITE + f"  Categoría: {producto['categoria']}")
+                    print(Fore.WHITE + f"  Precio: ${producto['precio']}")
                     encontrado = True
                     print("")
+            
             if encontrado == False:
-                print("No existe el producto")
+                print(Fore.RED + "No se encontraron productos con ese nombre")
 
         case "4":
-            print("Eliminar producto")
-            eliminar = input("Ingresa el numero del producto a eliminar: ").strip()
+            print(Fore.MAGENTA + "\nEliminar producto")
+            eliminar = input(Fore.WHITE + "Ingresa el numero del producto a eliminar: ").strip()
             while eliminar == "" or not eliminar.isdecimal():
-                print("Error: El número de producto es obligatorio y debe ser un número entero.")
-                eliminar = input("Ingresa el numero del producto a eliminar: ").strip()
+                print(Fore.RED + "Error: El número de producto es obligatorio y debe ser un número entero.")
+                eliminar = input(Fore.WHITE + "Ingresa el numero del producto a eliminar: ").strip()
             encontrado = False
             for contador, producto in enumerate(stock):
                 if int(eliminar) == contador + 1:
-                    print("¡Producto eliminado!")
-                    print(f"Producto # {contador + 1}:")
-                    print(f"  Nombre: {producto['nombre']}")
-                    print(f"  Categoría: {producto['categoria']}")
-                    print(f"  Precio: {producto['precio']}")
+                    print("")
+                    print(Fore.GREEN + "¡Producto eliminado!")
+                    print("")
+                    print(Fore.YELLOW + f"Producto # {contador + 1}:")
+                    print(Fore.WHITE + f"  Nombre: {producto['nombre']}")
+                    print(Fore.WHITE + f"  Categoría: {producto['categoria']}")
+                    print(Fore.WHITE + f"  Precio: ${producto['precio']}")
                     encontrado = True
                     stock.remove(producto)
        
             if encontrado == False:
-                print("No existe el producto")
+                print(Fore.RED + "No existe el producto")
         case "5":
-            print("¡Hasta luego!")
+            print(Fore.MAGENTA + "\n¡Hasta luego!")
         case _:
-            print("Opción no válida")
+            print(Fore.RED + "Opción no válida")
