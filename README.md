@@ -20,12 +20,14 @@ Todas las entradas son validadas (campos vacíos, tipos numéricos, etc.) antes 
 ### 2. Ver productos
 Muestra un listado completo de todos los productos en el inventario con el siguiente formato:
 
+```text
 Producto # 1:
   ID: 1
   Nombre: Lapicera Azul
   Categoria: Escritura
   Precio: $150
   Cantidad: 45
+  ```
 
 ### 3. Buscar producto
 Busca productos por nombre con las siguientes características:
